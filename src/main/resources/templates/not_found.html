@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Device Not Found</title>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+</head>
+<body>
+    <div class="container-fluid col-md-6 text-center">
+        <h1>404!! Device Not Found</h1>
+        <div th:if="${deviceNotFound}" class="alert alert-danger">
+            <span th:text="${deviceNotFound}"></span>
+        </div>
+        <a th:href="@{/}" class="btn btn-primary">Back to Home Page</a>
+    </div>
+</body>
+</html>
