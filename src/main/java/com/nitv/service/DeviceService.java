@@ -18,6 +18,10 @@ public class DeviceService {
         return deviceRepository.findAll();
     }
 
+    public List<Device> getDeviceBySearch(String search){
+        return deviceRepository.findAllByMacContainingOrBuildContainingOrChipSetContainingOrManufacturerContaining(search, search, search, search);
+    }
+
     public Device getDeviceById(int id){
         Optional<Device> device = deviceRepository.findById(id);
         return device.orElse(null);

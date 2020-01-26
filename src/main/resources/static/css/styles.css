@@ -1,26 +1,20 @@
 body{
-    background-color: lightblue;
+    background-color: cornsilk;
     /*background-image: url("../img/background_img.jpg");*/
-    background-repeat:no-repeat;
-
+    background-repeat: no-repeat;
     background-size: 100%;
 }
 
 footer{
-
     margin-top: 20px;
     padding-top: 20px;
 }
-/*.bg__card__navbar{*/
-/*    background-color: black;*/
-/*}*/
-/*.bg__card__footer{*/
-/*    background-color: #000000 !important;*/
-/*}*/
-#add__new__list{
+
+#add__new__device{
     top: -38px;
     right: 0px;
 }
+
 a{
     margin-left: 10px;
 }

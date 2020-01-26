@@ -2,6 +2,8 @@ package com.nitv.controller;
 
 import com.nitv.entity.Device;
 import com.nitv.service.DeviceService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,16 +16,32 @@ import java.util.List;
 @Controller
 public class DeviceController {
 
+    Logger logger = LoggerFactory.getLogger(DeviceController.class);
+
     @Autowired
     private DeviceService deviceService;
 
     @GetMapping("/")
-    public String getDevices(Model model){
-        List<Device> devices = deviceService.getDevices();
+    public String getDevices(@RequestParam(value = "search", required = false, defaultValue = "") String search ,Model model){
+        List<Device> devices;
+        if (search.isEmpty())
+            devices = deviceService.getDevices();
+        else
+            devices = deviceService.getDeviceBySearch(search);
+        model.addAttribute("search", search);
         model.addAttribute("devices", devices);
         Device device = new Device();
         model.addAttribute("device", device);
         return "index";
+    }
+
+    @GetMapping("/home")
+    public String getAllDevices(Model model){
+        List<Device> devices = deviceService.getDevices();
+        model.addAttribute("devices", devices);
+        Device device = new Device();
+        model.addAttribute("device", device);
+        return "home";
     }
 
     @GetMapping("/read/{id}")
