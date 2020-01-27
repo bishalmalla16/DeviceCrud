@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface DeviceRepository extends JpaRepository<Device, Integer> {
     Optional<Device> findByMac(String mac);
     List<Device> findAllByMacContainingOrBuildContainingOrChipSetContainingOrManufacturerContaining(String search1, String search2, String search3, String search4);
+
 }

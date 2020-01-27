@@ -40,14 +40,25 @@
             <div class="card-body text-center">
                 <h2 class="card-title">List of Devices</h2>
             </div>
+
             <div>
+                <label>Search: </label>
+                <input id="searchId" type="text" placeholder="Search">
     <!--            <form method="get" th:action="@{/}">-->
-                    <input id="searchId" type="text" placeholder="Search">
+<!--                <input type="text" name="search" placeholder="Search">-->
     <!--                <input type="submit" value="Search">-->
     <!--            </form>-->
-    <!--            <input type="button" id="searchId" value="Search">-->
             </div>
-
+            <div>
+                Show <select id="maxRows">
+                <option disabled selected>*</option>
+                <option value="2">2</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+            </select>
+                Entries
+            </div>
             <div class="card">
                 <div th:if="${saveError}" class="alert alert-danger">
                     <span th:text="${saveError}"></span>
@@ -81,8 +92,38 @@
                                 </td>
                             </tr>
                         </template>
+
+<!--                        <tr th:each="data : ${devices.content}">-->
+<!--                            <td th:text="${data.id}"></td>-->
+<!--                            <td th:text="${data.mac}"></td>-->
+<!--                            <td th:text="${data.chipSet}"></td>-->
+<!--                            <td th:text="${data.build}"></td>-->
+<!--                            <td th:text="${data.manufacturer}"></td>-->
+<!--                            <td>-->
+<!--                                <a class="btn btn-sm btn-info" th:href="'/read/'+${data.id}"><i class="fa fa-info-circle"></i> View</a>-->
+<!--                                <a class="btn btn-sm btn-primary" th:href="'/update/'+${data.id}"><i class="fa fa-edit"></i> Edit</a>-->
+<!--                                <a class="btn btn-sm btn-danger" th:href="'/delete/'+${data.id}"><i class="fa fa-trash"></i> Delete</a>-->
+<!--                            </td>-->
+<!--                        </tr>-->
                     </tbody>
                 </table>
+
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+
+                    </ul>
+                </nav>
+
+<!--                <div class="pagination-container">-->
+<!--                    <nav>-->
+<!--                        <ul class="pagination"></ul>-->
+<!--                    </nav>-->
+<!--                </div>-->
+<!--                <ul class="nav nav-pills">-->
+<!--                    <li class="nav-item" th:each="i: ${#numbers.sequence(1, devices.totalPages)}">-->
+<!--                        <a th:href="@{/(page = ${i})}" th:text="${i}" class="nav-link" th:classappend="(${currentPage} == ${i}) ? 'active': ''"></a>-->
+<!--                    </li>-->
+<!--                </ul>-->
             </div>
             <!-- Large modal -->
 

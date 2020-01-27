@@ -3,6 +3,8 @@ package com.nitv.service;
 import com.nitv.entity.Device;
 import com.nitv.repository.DeviceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +18,10 @@ public class DeviceService {
 
     public List<Device> getDevices() {
         return deviceRepository.findAll();
+    }
+
+    public Page<Device> getPagedDevices(PageRequest pageRequest){
+        return deviceRepository.findAll(pageRequest);
     }
 
     public List<Device> getDeviceBySearch(String search){
