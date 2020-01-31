@@ -23,8 +23,9 @@ public class DeviceService {
         return deviceRepository.findAll(pageRequest);
     }
 
-    public List<Device> getDeviceBySearch(String search){
-        return deviceRepository.findAllByMacContainingOrBuildContainingOrChipSetContainingOrManufacturerContaining(search, search, search, search);
+    public Page<Device> getDeviceBySearch(String search, Pageable pageable){
+//        return deviceRepository.findAllByMacContainingOrBuildContainingOrChipSetContainingOrManufacturerContaining(search, search, search, search);
+        return deviceRepository.findAllByMacContainingOrBuildContainingOrChipSetContainingOrManufacturerContaining(search, search, search, search, pageable);
     }
 
     public Device getDeviceById(int id){
@@ -45,8 +46,8 @@ public class DeviceService {
         deviceRepository.deleteById(id);
     }
 
-    public List<Device> getFilteredDevices(String mac, String chipSet, String build, String manufacturer) {
-        return deviceRepository.findAllByMacContainingAndChipSetContainingAndBuildContainingAndManufacturerContaining(mac, chipSet, build, manufacturer);
+    public Page<Device> getFilteredDevices(String mac, String chipSet, String build, String manufacturer, Pageable pageable) {
+        return deviceRepository.findAllByMacContainingAndChipSetContainingAndBuildContainingAndManufacturerContaining(mac, chipSet, build, manufacturer, pageable);
 //
 //        Device device = new Device();
 //        device.setId(3);      //Unsolved Error
