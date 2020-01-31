@@ -3,8 +3,7 @@ package com.nitv.service;
 import com.nitv.entity.Device;
 import com.nitv.repository.DeviceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,11 +36,24 @@ public class DeviceService {
         Optional<Device> device = deviceRepository.findByMac(mac);
         return device.orElse(null);
     }
+
     public void saveDevice(Device device) {
         deviceRepository.save(device);
     }
 
     public void removeDevice(int id) {
         deviceRepository.deleteById(id);
+    }
+
+    public List<Device> getFilteredDevices(String mac, String chipSet, String build, String manufacturer) {
+        return deviceRepository.findAllByMacContainingAndChipSetContainingAndBuildContainingAndManufacturerContaining(mac, chipSet, build, manufacturer);
+//
+//        Device device = new Device();
+//        device.setId(3);      //Unsolved Error
+//        device.setMac(mac);
+//        device.setChipSet(chipSet);
+//        device.setBuild(build);
+//        device.setManufacturer(manufacturer);
+//        return deviceRepository.findAll(Example.of(device));
     }
 }

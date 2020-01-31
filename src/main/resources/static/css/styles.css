@@ -18,3 +18,12 @@ footer{
 a{
     margin-left: 10px;
 }
+
+.filter input{
+    margin-left: 10px;
+}
+
+#maxRows{
+    width: 80px;
+    margin: 0 5px;
+}

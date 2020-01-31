@@ -1,18 +1,23 @@
 package com.nitv.controller;
 
 import com.nitv.entity.Device;
-import com.nitv.error_handling.DeviceNotFoundException;
 import com.nitv.service.DeviceService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.List;
 
-@RestController
+@Controller
 public class TableController {
     @Autowired
     private DeviceService deviceService;
+
+    Logger logger = LoggerFactory.getLogger(TableController.class);
 
     //Get All Devices via Search Parameter
 
@@ -34,8 +39,8 @@ public class TableController {
     // Thymeleaf Pagination for the Device Table
 
 //    @GetMapping("/")
-//    public String getDevices(@RequestParam(value = "page", required = false, defaultValue = "1") int page ,Model model){
-//        Page<Device> devices = deviceService.getPagedDevices(PageRequest.of(page-1, 5));
+//    public String getDevices(@RequestParam(value = "page", required = false, defaultValue = "1") int page ,@RequestParam(value = "size", required = false, defaultValue = "5") int size , Model model){
+//        Page<Device> devices = deviceService.getPagedDevices(PageRequest.of(page-1, size));
 //        model.addAttribute("devices", devices);
 //        Device device = new Device();
 //        model.addAttribute("device", device);
@@ -43,27 +48,5 @@ public class TableController {
 //        return "index";
 //    }
 
-    @GetMapping("/devices/search/{search}")
-    public List<Device> getDevicesBySearch(@PathVariable String search){
-        return deviceService.getDeviceBySearch(search);
-    }
-
-    @GetMapping("/devices")
-    public List<Device> getDevices(){
-        return deviceService.getDevices();
-    }
-
-    @GetMapping("/devices/{id}")
-    public Device getDevice(@PathVariable int id){
-        Device device = deviceService.getDeviceById(id);
-        if(device == null)
-            throw new DeviceNotFoundException("Device with id " + id + " not found.");
-        else return device;
-    }
-
-    @PostMapping("/devices")
-    public void addDevice(@RequestBody @Valid Device device){
-        deviceService.saveDevice(device);
-    }
 
 }

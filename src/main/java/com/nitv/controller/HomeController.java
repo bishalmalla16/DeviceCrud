@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-public class DeviceController {
+public class HomeController {
 
     @Autowired
     private DeviceService deviceService;
