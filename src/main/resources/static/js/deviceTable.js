@@ -116,15 +116,10 @@ $(function () {
     $maxRows.on('change', function () {
         maxRows = $(this).val();
         var myUrl;
-
-        if ($searchId.val() == '') {
-            if($mac.val() == '' && $chipSet.val() == '' && $build.val() == '' && $manufacturer.val() == '')
-                myUrl = '/devices?size='+maxRows;
-            else
-                myUrl = '/getDevices?mac='+ $mac.val() + '&chipSet=' + $chipSet.val() + '&build=' + $build.val() + '&manufacturer=' + $manufacturer.val() + '&size=' + maxRows;
-        } else {
-            myUrl = '/devices/search/' + $searchId.val() + '?size=' + maxRows;
-        }
+        if($mac.val() == '' && $chipSet.val() == '' && $build.val() == '' && $manufacturer.val() == '')
+            myUrl = '/devices?search=' + $searchId.val() + '&size=' + maxRows;
+        else
+            myUrl = '/getDevices?mac='+ $mac.val() + '&chipSet=' + $chipSet.val() + '&build=' + $build.val() + '&manufacturer=' + $manufacturer.val() + '&size=' + maxRows;
         getDevices(myUrl);
     });
 
@@ -134,12 +129,7 @@ $(function () {
         $build.val('');
         $chipSet.val('');
         $manufacturer.val('');
-        var myUrl;
-        if ($searchId.val() == '') {
-            myUrl = '/devices?size=' + maxRows;
-        } else {
-            myUrl = '/devices/search/' + $searchId.val() + '?size=' + maxRows;
-        }
+        var myUrl = '/devices?search=' + $searchId.val() + '&size=' + maxRows;
         getDevices(myUrl);
     });
 

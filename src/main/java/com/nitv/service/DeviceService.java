@@ -19,12 +19,7 @@ public class DeviceService {
         return deviceRepository.findAll();
     }
 
-    public Page<Device> getPagedDevices(PageRequest pageRequest){
-        return deviceRepository.findAll(pageRequest);
-    }
-
     public Page<Device> getDeviceBySearch(String search, Pageable pageable){
-//        return deviceRepository.findAllByMacContainingOrBuildContainingOrChipSetContainingOrManufacturerContaining(search, search, search, search);
         return deviceRepository.findAllByMacContainingOrBuildContainingOrChipSetContainingOrManufacturerContaining(search, search, search, search, pageable);
     }
 
@@ -38,17 +33,9 @@ public class DeviceService {
         return device.orElse(null);
     }
 
-    public void saveDevice(Device device) {
-        deviceRepository.save(device);
-    }
-
-    public void removeDevice(int id) {
-        deviceRepository.deleteById(id);
-    }
-
     public Page<Device> getFilteredDevices(String mac, String chipSet, String build, String manufacturer, Pageable pageable) {
         return deviceRepository.findAllByMacContainingAndChipSetContainingAndBuildContainingAndManufacturerContaining(mac, chipSet, build, manufacturer, pageable);
-//
+
 //        Device device = new Device();
 //        device.setId(3);      //Unsolved Error
 //        device.setMac(mac);
@@ -57,4 +44,13 @@ public class DeviceService {
 //        device.setManufacturer(manufacturer);
 //        return deviceRepository.findAll(Example.of(device));
     }
+
+    public void saveDevice(Device device) {
+        deviceRepository.save(device);
+    }
+
+    public void removeDevice(int id) {
+        deviceRepository.deleteById(id);
+    }
+
 }

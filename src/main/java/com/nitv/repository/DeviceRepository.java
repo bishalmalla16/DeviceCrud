@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface DeviceRepository extends JpaRepository<Device, Integer> {
@@ -17,6 +16,5 @@ public interface DeviceRepository extends JpaRepository<Device, Integer> {
 //    @Query("select d from Device d where mac ...")
 
     Page<Device> findAllByMacContainingAndChipSetContainingAndBuildContainingAndManufacturerContaining(String mac, String chipSet, String build, String manufacturer, Pageable pageable);
-
 
 }

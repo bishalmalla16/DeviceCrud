@@ -85,7 +85,7 @@ public class HomeController {
     public String updateDevice(@ModelAttribute("device") @Valid Device device, BindingResult bindingResult, Model model){
         device.setMac(device.getMac().toUpperCase());
         if (bindingResult.hasErrors()){
-            model.addAttribute("updateError", "Error while Updating.");
+            model.addAttribute("updateError", "Error while Updating. Enter the fields correctly.");
             return "update-device";
         }
         Device device1 = deviceService.getDeviceById(device.getId());

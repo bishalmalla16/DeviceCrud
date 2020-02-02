@@ -15,18 +15,12 @@ public class DeviceController {
     @Autowired
     private DeviceService deviceService;
 
-    @GetMapping("/devices/search/{search}")
-    public Page<Device> getDevicesBySearch(@PathVariable String search,
-               @RequestParam(value = "page", defaultValue = "1", required = false) int page,
-               @RequestParam(value = "size", defaultValue = "20", required = false) int size){
-        return deviceService.getDeviceBySearch(search, PageRequest.of(page-1, size));
-    }
-
     @GetMapping("/devices")
     public Page<Device> getDevices(
+            @RequestParam(value = "search", defaultValue = "", required = false) String search,
             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
            @RequestParam(value = "size", required = false, defaultValue = "20") int size){
-        return deviceService.getPagedDevices(PageRequest.of(page-1,size));
+        return deviceService.getDeviceBySearch(search, PageRequest.of(page-1, size));
     }
 
     @GetMapping("/devices/{id}")
